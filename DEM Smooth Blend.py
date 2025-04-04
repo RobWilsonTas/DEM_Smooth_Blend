@@ -10,8 +10,8 @@ User options
 """
 
 #Initial variable assignment
-baseDEM         = 'C:/GIS Work/QGIS Scripts/DEM Smooth Blend/OrigDEM.tif'      #The extent of this DEM must fully contain the newDEM
-newDEM          = 'C:/GIS Work/QGIS Scripts/DEM Smooth Blend/NewDEMV2.tif'     #Any extent of this DEM outside the base DEM will be clipped off
+baseDEM         = 'C:/DEM Smooth Blend/BaseDEM.tif'      #The extent of this DEM must fully contain the newDEM
+newDEM          = 'C:/DEM Smooth Blend/NewDEM.tif'     #Any extent of this DEM outside the base DEM will be clipped off
 blendDistance   = 50
 roundCorners    = True
 
