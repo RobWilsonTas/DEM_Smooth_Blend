@@ -1,3 +1,5 @@
+This is a PyQGIS script
+
 What will often happen when you produce a mosaicked DEM is that later on new data will come through that you may want to use to override the existing elevation data
 
 Simply sitting the new DEM over the top of the existing DEM will leave a rough edge at the bounds of the new DEM
