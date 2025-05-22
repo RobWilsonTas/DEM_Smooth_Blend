@@ -39,12 +39,12 @@ newDEMName = newDEMName[-1]
 newDEMName = newDEMName[:len(newDEMName)-4]
 
 #Making a folder for processing
-rootProcessDirectory = str(Path(origDEM).parent.absolute()).replace('\\','/') + '/'
-processDirectory = rootProcessDirectory + origDEMName + 'BlendProcess' + '/'
+rootProcessDirectory = str(Path(baseDEM).parent.absolute()).replace('\\','/') + '/'
+processDirectory = rootProcessDirectory + baseDEMName + 'BlendProcess' + '/'
 if not os.path.exists(processDirectory):        os.mkdir(processDirectory)
 
 #Get the pixel size and coordinate system of the raster
-ras = QgsRasterLayer(origDEM)
+ras = QgsRasterLayer(baseDEM)
 pixelSizeX = ras.rasterUnitsPerPixelX()
 pixelSizeY = ras.rasterUnitsPerPixelY()
 rasExtent = ras.extent()
@@ -111,7 +111,7 @@ processing.run("gdal:rastercalculator", {'INPUT_A':processDirectory + 'NewDEMFul
 
 #Bring the base and the new DEM together, using the blend weighting raster to determine values
 processing.run("gdal:rastercalculator", {'INPUT_A':baseDEM,'BAND_A':1,'INPUT_B':processDirectory + 'NewDEMFullNoNull.tif','BAND_B':1,'INPUT_C':processDirectory + 'NewDEMFullNegativeFlippedProxSmooth.tif','BAND_C':1,'INPUT_D':None,'BAND_D':None,'INPUT_E':None,'BAND_E':None,'INPUT_F':None,'BAND_F':None,
-    'FORMULA':'(B*(C/'+ str(blendDistance) + ')) + (A*(1-(C/'+ str(blendDistance) + ')))','NO_DATA':None,'EXTENT_OPT':0,'PROJWIN':None,'RTYPE':5,'OPTIONS':compressOptions,'EXTRA':'','OUTPUT':rootProcessDirectory + origDEMName + 'Blended.tif'})
+    'FORMULA':'(B*(C/'+ str(blendDistance) + ')) + (A*(1-(C/'+ str(blendDistance) + ')))','NO_DATA':None,'EXTENT_OPT':0,'PROJWIN':None,'RTYPE':5,'OPTIONS':compressOptions,'EXTRA':'','OUTPUT':rootProcessDirectory + baseDEMName + 'Blended.tif'})
 
 
 """
